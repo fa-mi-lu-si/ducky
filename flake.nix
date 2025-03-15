@@ -29,6 +29,7 @@
           python3Packages.python-lsp-server
           python3Packages.python-lsp-ruff
           python3Packages.pylsp-rope
+          python3Packages.websockets
           mpremote
 
           godot_4
