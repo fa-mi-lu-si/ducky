@@ -1,8 +1,18 @@
 from machine import I2C
 from MPU6050 import MPU6050
 from time import sleep
+import urequests
 
 mpu = MPU6050(I2C(0))
+
+def test_network():
+    try:
+        response = urequests.get("https://api.chucknorris.io/jokes/random")
+        print("We've got internet here's a joke\n:", response.text)
+        response.close()
+    except Exception as e:
+        print("Request failed:", e)
+
 
 while True:
     # Accelerometer Data
@@ -11,7 +21,6 @@ while True:
     # aY = accel["y"]
     # aZ = accel["z"]
     # print("x: " + str(aX) + " y: " + str(aY) + " z: " + str(aZ))
-
 
     # Angle Data
     angle = mpu.read_angle()
@@ -25,12 +34,11 @@ while True:
     # print("x:" + str(gX) + " y:" + str(gY) + " z:" + str(gZ))
 
     # Rough Temperature
-    temp = mpu.read_temperature()   # read the device temperature [degC]
+    temp = mpu.read_temperature()  # read the device temperature [degC]
     print("Temperature: " + str(temp) + "°C")
 
     # G-Force
     # gforce = mpu.read_accel_abs(g=True) # read the absolute acceleration magnitude
     # print("G-Force: " + str(gforce))
-    
+
     sleep(0.5)
- 
