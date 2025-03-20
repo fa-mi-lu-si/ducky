@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdtwamf8me8j2"]
+
+[ext_resource type="Script" uid="uid://cvg20efhakarg" path="res://server.gd" id="1_y6ufa"]
+
+[node name="Node" type="Node"]
+
+[node name="server" type="Node" parent="."]
+script = ExtResource("1_y6ufa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+text = "Hello world"
+
+[node name="TextServer" type="RichTextLabel" parent="CanvasLayer/Control/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[color=#aaaaaa] 17:07:56 |[/color] hello there
+[color=#aaaaaa] 18:21:26 |[/color] hello there
+[color=#aaaaaa] 18:21:55 |[/color] hello there
+"
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="TestCube" type="CSGBox3D" parent="Node3D"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.84815, 0.529756, 0, -0.529756, 0.84815, 0, 1.55238, 2.18578)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+transform = Transform3D(-0.318745, -0.609725, 0.725698, 0.794296, 0.24595, 0.55552, -0.5172, 0.753488, 0.405907, 3.43196, 2.73466, 0.941857)
