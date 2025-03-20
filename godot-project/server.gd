@@ -4,13 +4,16 @@ extends Node
 ## The port the server will listen on.
 const PORT = 9080
 
+signal message_recieved(message: String)
+
 var tcp_server := TCPServer.new()
 var socket := WebSocketPeer.new()
 
 func log_message(message: String) -> void:
 	var time := "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
 	print("Message:\n\t" + message)
-	%TextServer.text += time + message + "\n"
+	if not Engine.is_editor_hint():
+		%TextServer.text += time + message + "\n"
 
 
 func _ready() -> void:
@@ -31,7 +34,7 @@ func _process(_delta: float) -> void:
 
 	if socket.get_ready_state() == WebSocketPeer.STATE_OPEN:
 		while socket.get_available_packet_count():
-			log_message(socket.get_packet().get_string_from_ascii())
+			message_recieved.emit(socket.get_packet().get_string_from_ascii())
 
 
 func _exit_tree() -> void:

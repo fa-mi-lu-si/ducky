@@ -1,9 +1,13 @@
 from machine import I2C
 from MPU6050 import MPU6050
 from time import sleep
+import json
+import uwebsockets.client
 import urequests
 
 mpu = MPU6050(I2C(0))
+websocket = uwebsockets.client.connect("ws://192.168.236.169:9080/")
+
 
 def test_network():
     try:
@@ -24,7 +28,8 @@ while True:
 
     # Angle Data
     angle = mpu.read_angle()
-    print(f"x:{str(angle['x'])} y:{str(angle['y'])}")
+    # print(f"x:{str(angle['x'])} y:{str(angle['y'])}")
+    websocket.send(json.dumps({"x": angle["x"], "y": angle["y"]}))
 
     # Gyroscope Data
     # gyro = mpu.read_gyro_data()   # read the gyro [deg/s]
@@ -35,10 +40,10 @@ while True:
 
     # Rough Temperature
     temp = mpu.read_temperature()  # read the device temperature [degC]
-    print("Temperature: " + str(temp) + "°C")
+    # print("Temperature: " + str(temp) + "°C")
 
     # G-Force
     # gforce = mpu.read_accel_abs(g=True) # read the absolute acceleration magnitude
     # print("G-Force: " + str(gforce))
 
-    sleep(0.5)
+    # sleep(0.1)
