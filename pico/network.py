@@ -1,10 +1,10 @@
 import network
 from time import time
 
-# SSID = "iPhone X"
-# PASSWORD = "MakerCulture7!"
-SSID = "Something"
+SSID = "iPhone X"
 PASSWORD = "MakerCulture7!"
+# SSID = "Something"
+# PASSWORD = "MakerCulture7!"
 
 CONNECTION_TIMEOUT = 20  # Abort the connection after this many seconds
 

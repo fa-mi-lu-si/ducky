@@ -10,10 +10,7 @@ var tcp_server := TCPServer.new()
 var socket := WebSocketPeer.new()
 
 func log_message(message: String) -> void:
-	var time := "[color=#aaaaaa] %s |[/color] " % Time.get_time_string_from_system()
 	print("Message:\n\t" + message)
-	if not Engine.is_editor_hint():
-		%TextServer.text += time + message + "\n"
 
 
 func _ready() -> void:

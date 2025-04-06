@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdtwamf8me8j2"]
+[gd_scene load_steps=4 format=3 uid="uid://bdtwamf8me8j2"]
 
 [ext_resource type="Script" uid="uid://cvg20efhakarg" path="res://server.gd" id="1_y6ufa"]
 [ext_resource type="Script" uid="uid://crdc1q1tlba0u" path="res://rotation_controller.gd" id="2_x2uf6"]
+[ext_resource type="ArrayMesh" uid="uid://c7uwedacsn0jd" path="res://ducky.obj" id="3_bt7i5"]
 
 [node name="Node" type="Node"]
 
@@ -38,8 +39,12 @@ transform = Transform3D(1, 0, 0, 0, 0.84815, 0.529756, 0, -0.529756, 0.84815, 0,
 transform = Transform3D(-0.318745, -0.609725, 0.725698, 0.794296, 0.24595, 0.55552, -0.5172, 0.753488, 0.405907, 3.43196, 2.73466, 0.941857)
 
 [node name="TestRotation" type="Node3D" parent="Node3D"]
+transform = Transform3D(0.996781, 0.0801721, 0, -0.0801718, 0.996778, 0.00250563, 0.000200881, -0.00249756, 0.999997, 0, 0, 0)
 script = ExtResource("2_x2uf6")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/TestRotation"]
+[node name="Ducky" type="MeshInstance3D" parent="Node3D/TestRotation"]
+transform = Transform3D(0.999988, -0.00499819, -1.72573e-05, 0.00499819, 0.999987, 0.000525789, 1.46291e-05, -0.000525869, 1, 0, -0.1, 0)
+mesh = ExtResource("3_bt7i5")
+skeleton = NodePath("../../..")
 
 [connection signal="message_recieved" from="server" to="Node3D/TestRotation" method="_on_server_message_recieved"]
