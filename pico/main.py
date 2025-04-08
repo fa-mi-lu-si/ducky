@@ -6,7 +6,7 @@ import uwebsockets.client
 import urequests
 
 mpu = MPU6050(I2C(0))
-websocket = uwebsockets.client.connect("ws://192.168.236.169:9080/")
+websocket = uwebsockets.client.connect("ws://192.168.1.76:9080/")
 
 
 def test_network():
