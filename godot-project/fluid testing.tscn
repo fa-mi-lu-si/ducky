@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://xdwcy6n4dehd"]
+
+[ext_resource type="Script" uid="uid://brlclnke20s5c" path="res://addons/godot-rapier3d/fluid_3d_sphere.gd" id="1_7cbcv"]
+[ext_resource type="Script" uid="uid://3o24scqmks78" path="res://addons/godot-rapier3d/fluid_3d_renderer.gd" id="2_0f1aw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cbcv"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rjqt0"]
+radius = 0.125
+height = 0.25
+
+[sub_resource type="MultiMesh" id="MultiMesh_nt55s"]
+transform_format = 1
+use_colors = true
+mesh = SubResource("SphereMesh_rjqt0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0f1aw"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="static box" type="StaticBody3D" parent="."]
+transform = Transform3D(2.28436, 0, 0, 0, 2.28436, 0, 0, 0, 2.28436, 0, -5.73026, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="static box"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 5)
+shape = SubResource("BoxShape3D_7cbcv")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="static box"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, -5)
+shape = SubResource("BoxShape3D_7cbcv")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="static box"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -5, 5, 0)
+shape = SubResource("BoxShape3D_7cbcv")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="static box"]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 5, 5, 0)
+shape = SubResource("BoxShape3D_7cbcv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="static box"]
+shape = SubResource("BoxShape3D_7cbcv")
+
+[node name="Fluid3D" type="Fluid3D" parent="."]
+debug_draw = true
+density = 1000.0
+script = ExtResource("1_7cbcv")
+sphere_radius = 8
+
+[node name="Fluid3DRenderer" type="MultiMeshInstance3D" parent="." node_paths=PackedStringArray("fluid")]
+multimesh = SubResource("MultiMesh_nt55s")
+script = ExtResource("2_0f1aw")
+fluid = NodePath("../Fluid3D")
+metadata/_custom_type_script = "uid://3o24scqmks78"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.911108, 0.412167, 0, -0.412167, 0.911108, 1.90735e-06, 14.812, 19.9287)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.683013, 0.683013, -0.258819, -0.183013, 0.183013, 0.965926, 0.707107, 0.707107, -4.37114e-08, -25, 21, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.62697, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_0f1aw")
