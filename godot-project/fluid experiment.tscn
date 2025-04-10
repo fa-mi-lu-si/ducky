@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://wp7jq05yq7rm"]
+
+[ext_resource type="Script" uid="uid://03nir4y46uc3" path="res://addons/godot-rapier3d/faucet_3d.gd" id="1_yiio7"]
+[ext_resource type="ArrayMesh" uid="uid://taj81mi43rq4" path="res://bath.obj" id="2_ktgp7"]
+[ext_resource type="Script" uid="uid://3o24scqmks78" path="res://addons/godot-rapier3d/fluid_3d_renderer.gd" id="2_yiio7"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yiio7"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="MultiMesh" id="MultiMesh_w6bid"]
+transform_format = 1
+use_colors = true
+mesh = SubResource("SphereMesh_yiio7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yiio7"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w6bid"]
+size = Vector3(1.405, 0.43, 2.31)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uljp2"]
+size = Vector3(1.44, 1, 0.32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y0yye"]
+size = Vector3(0.4, 1, 2.725)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Fluid3D" type="Fluid3D" parent="."]
+debug_draw = true
+density = 1000.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 0)
+script = ExtResource("1_yiio7")
+
+[node name="Fluid3DRenderer" type="MultiMeshInstance3D" parent="Fluid3D" node_paths=PackedStringArray("fluid")]
+multimesh = SubResource("MultiMesh_w6bid")
+script = ExtResource("2_yiio7")
+fluid = NodePath("..")
+metadata/_custom_type_script = "uid://3o24scqmks78"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, 0.353553, -0.353554, 0, 0.707107, 0.707106, 0.5, -0.612372, 0.612373, -5, 44.8858, 33.3849)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.5, 0)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -15, 13.5, 0)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 15, 13.5, 0)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 2.18557e-07, 13.5, -15)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -2.18557e-07, 13.5, 15)
+shape = SubResource("BoxShape3D_yiio7")
+
+[node name="Bath" type="StaticBody3D" parent="."]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+
+[node name="Bath Model" type="MeshInstance3D" parent="Bath"]
+mesh = ExtResource("2_ktgp7")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bath"]
+shape = SubResource("BoxShape3D_w6bid")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Bath"]
+transform = Transform3D(1, 0, 0, 0, 0.896548, -0.442946, 0, 0.442946, 0.896548, 0, 0.6, 1.19323)
+shape = SubResource("BoxShape3D_uljp2")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Bath"]
+transform = Transform3D(1, 0, 0, 0, 0.915936, 0.401324, 0, -0.401324, 0.915936, 0, 0.6, -1.2)
+shape = SubResource("BoxShape3D_uljp2")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Bath"]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, -0.7, 0.5, 0)
+shape = SubResource("BoxShape3D_y0yye")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Bath"]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0.7, 0.5, 0)
+shape = SubResource("BoxShape3D_y0yye")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.365073, -0.50511, 0.782039, 0.913739, -0.0334934, 0.40492, -0.178336, 0.862405, 0.473766, 14, 44, 27)
