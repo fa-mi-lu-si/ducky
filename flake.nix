@@ -29,7 +29,8 @@
           python3Packages.python-lsp-server
           python3Packages.python-lsp-ruff
           python3Packages.pylsp-rope
-          python3Packages.websockets
+          # TODO: get the micropython stubs
+          python3Packages.pylsp-mypy
           mpremote
 
           godot_4
