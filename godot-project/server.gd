@@ -1,4 +1,4 @@
-@tool
+# @tool
 extends Node
 
 ## The port the server will listen on.

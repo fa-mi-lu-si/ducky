@@ -1,8 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://wp7jq05yq7rm"]
+[gd_scene load_steps=16 format=3 uid="uid://wp7jq05yq7rm"]
 
 [ext_resource type="Script" uid="uid://03nir4y46uc3" path="res://addons/godot-rapier3d/faucet_3d.gd" id="1_yiio7"]
 [ext_resource type="ArrayMesh" uid="uid://taj81mi43rq4" path="res://bath.obj" id="2_ktgp7"]
 [ext_resource type="Script" uid="uid://3o24scqmks78" path="res://addons/godot-rapier3d/fluid_3d_renderer.gd" id="2_yiio7"]
+[ext_resource type="ArrayMesh" uid="uid://c7uwedacsn0jd" path="res://ducky.obj" id="4_uljp2"]
+[ext_resource type="Script" uid="uid://cvg20efhakarg" path="res://server.gd" id="4_w6bid"]
+[ext_resource type="Script" uid="uid://crdc1q1tlba0u" path="res://rotation_controller.gd" id="4_y0yye"]
 
 [sub_resource type="FluidEffect3DViscosityXSPH" id="FluidEffect3DViscosityXSPH_yiio7"]
 fluid_viscosity_coefficient = 0.8
@@ -31,50 +34,8 @@ size = Vector3(21.6, 15, 4.8)
 [sub_resource type="BoxShape3D" id="BoxShape3D_y0yye"]
 size = Vector3(6, 15, 20)
 
-[sub_resource type="Animation" id="Animation_yiio7"]
-resource_name = "side to side"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 0), Vector3(1, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_w6bid"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6bid"]
-_data = {
-&"RESET": SubResource("Animation_w6bid"),
-&"side to side": SubResource("Animation_yiio7")
-}
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_yiio7"]
-radius = 5.0
-
-[sub_resource type="SphereMesh" id="SphereMesh_w6bid"]
-radius = 5.0
-height = 10.0
+radius = 3.0
 
 [node name="Node3D" type="Node3D"]
 
@@ -160,22 +121,24 @@ shape = SubResource("BoxShape3D_y0yye")
 transform = Transform3D(0.933012, 0.25, 0.258819, -0.258819, 0.965925, 0, -0.25, -0.0669873, 0.965926, 10.5, 7.5, -10)
 shape = SubResource("BoxShape3D_y0yye")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bath"]
-libraries = {
-&"": SubResource("AnimationLibrary_w6bid")
-}
-autoplay = "side to side"
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.365073, -0.50511, 0.782039, 0.913739, -0.0334934, 0.40492, -0.178336, 0.862405, 0.473766, 14, 44, 27)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1541, 10.6943, 14.3993)
+[node name="Duck" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49331, 10.6943, 3.33246)
 mass = 5000.0
+script = ExtResource("4_y0yye")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="Ducky" type="MeshInstance3D" parent="Duck"]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, -2, 0)
+mesh = ExtResource("4_uljp2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Duck"]
 shape = SubResource("SphereShape3D_yiio7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
-mesh = SubResource("SphereMesh_w6bid")
+[node name="server" type="Node" parent="."]
+script = ExtResource("4_w6bid")
+
+[connection signal="message_recieved" from="server" to="Duck" method="_on_server_message_recieved"]

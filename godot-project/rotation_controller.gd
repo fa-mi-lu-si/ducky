@@ -1,4 +1,4 @@
-@tool
+# @tool
 extends Node3D
 
 func _on_server_message_recieved(message: String) -> void:
