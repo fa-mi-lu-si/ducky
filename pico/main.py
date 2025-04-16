@@ -4,9 +4,12 @@ from time import sleep
 import json
 import uwebsockets.client
 import urequests
+from config_tool import read_json_file
 
 mpu = MPU6050(I2C(0))
-websocket = uwebsockets.client.connect("ws://192.168.1.76:9080/")
+
+config = read_json_file("config.jsonc")
+websocket = uwebsockets.client.connect(f"ws://{config["IP_ADDRESS"]}:9080/")
 
 
 def test_network():
