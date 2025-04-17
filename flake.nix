@@ -29,7 +29,6 @@
           python3Packages.python-lsp-server
           python3Packages.python-lsp-ruff
           python3Packages.pylsp-rope
-          # TODO: get the micropython stubs
           python3Packages.pylsp-mypy
           mpremote
 
@@ -43,7 +42,7 @@
 
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
-          # pip install -r requirements.txt
+          pip install -r requirements.txt
         '';
 
         postShellHook = ''

@@ -1,0 +1,6 @@
+[tool.mypy]
+platform = "linux"
+mypy_path = ".venv/lib/site-packages"
+custom_typeshed_dir = ".venv/lib/site-packages" # allow mypy to use micropython-stdlib
+files = "src/*.py"
+follow_imports = "silent"
