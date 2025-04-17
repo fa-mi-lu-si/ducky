@@ -1,9 +1,11 @@
 import network
+from machine import Pin
 from config_tool import read_json_file
 from time import time
 
 CONNECTION_TIMEOUT = 20  # Abort the connection after this many seconds
-
+network_light = Pin("GP16",Pin.OUT)
+network_light.off()
 
 def connect_wifi(ssid, password):
     start_time = time()
@@ -16,6 +18,7 @@ def connect_wifi(ssid, password):
         ):
             pass
     print(station.ifconfig())
+    network_light.value(station.isconnected())
     return station.isconnected()
 
 

@@ -1,6 +1,5 @@
 from machine import I2C
 from MPU6050 import MPU6050
-from time import sleep
 import json
 import uwebsockets.client
 import urequests
