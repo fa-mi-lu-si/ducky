@@ -97,6 +97,10 @@ shape = SubResource("BoxShape3D_y0yye")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.365073, -0.50511, 0.782039, 0.913739, -0.0334934, 0.40492, -0.178336, 0.862405, 0.473766, 14, 44, 27)
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.241066, -0.84692, 0.473935, 0.913739, -0.0334934, 0.40492, -0.327061, 0.530665, 0.781937, -55.3176, 44, 9.23818)
+light_energy = 0.6
+
 [node name="Duck" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49331, 8.6943, 3.33246)
 mass = 5000.0

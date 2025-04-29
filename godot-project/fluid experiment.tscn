@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://3o24scqmks78" path="res://addons/godot-rapier3d/fluid_3d_renderer.gd" id="2_yiio7"]
 [ext_resource type="ArrayMesh" uid="uid://c7uwedacsn0jd" path="res://ducky.obj" id="4_uljp2"]
 [ext_resource type="Script" uid="uid://cvg20efhakarg" path="res://server.gd" id="4_w6bid"]
-[ext_resource type="Script" uid="uid://crdc1q1tlba0u" path="res://rotation_controller.gd" id="4_y0yye"]
 
 [sub_resource type="FluidEffect3DViscosityXSPH" id="FluidEffect3DViscosityXSPH_yiio7"]
 fluid_viscosity_coefficient = 0.8
@@ -13,7 +12,12 @@ fluid_viscosity_coefficient = 0.8
 [sub_resource type="FluidEffect3DSurfaceTensionWCSPH" id="FluidEffect3DSurfaceTensionWCSPH_yiio7"]
 fluid_tension_coefficient = 1.1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0yye"]
+shading_mode = 2
+albedo_color = Color(0.27451, 0.47451, 0.705882, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_yiio7"]
+material = SubResource("StandardMaterial3D_y0yye")
 radial_segments = 8
 rings = 8
 
@@ -139,10 +143,9 @@ metadata/_edit_group_ = true
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 mesh = ExtResource("4_uljp2")
 skeleton = NodePath("../..")
-script = ExtResource("4_y0yye")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Duck"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.71358, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.03349, 0)
 shape = SubResource("CapsuleShape3D_y0yye")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Duck"]
