@@ -1,6 +1,7 @@
 # Ducky
 
 This is a demo of how to bring in real time sensor data to a simulated environment
+The physics simulation is done in godot with the rapier physics addon
 
 # Hardware
 
